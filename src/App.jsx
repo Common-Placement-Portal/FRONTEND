@@ -1,17 +1,7 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext";
-import Login from "./pages/Login";
+import StudentDashboard from "./dashboards/student/StudentDashboard";
 
 function App() {
-  return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="*" element={<Login />} />
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
-  );
+  return <StudentDashboard />;
 }
 
 export default App;

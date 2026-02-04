@@ -1,0 +1,179 @@
+/* Dashboard Styles */
+.dashboard {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.dashboard-header {
+  background-color: #007bff;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.dashboard-header h1 {
+  margin-bottom: 5px;
+}
+
+.dashboard-nav {
+  background-color: white;
+  padding: 0;
+  display: flex;
+  border-bottom: 1px solid #ddd;
+}
+
+.dashboard-nav button {
+  padding: 15px 30px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.dashboard-nav button:hover {
+  background-color: #f8f9fa;
+}
+
+.dashboard-nav button.active {
+  border-bottom-color: #007bff;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.dashboard-content {
+  padding: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Profile Section */
+.profile-section {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.photo-upload {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.photo-preview {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #ddd;
+}
+
+.photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6c757d;
+}
+
+/* Interviews Section */
+.interviews-section {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.interviews-list {
+  display: grid;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.interview-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+.interview-card h3 {
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.status.scheduled {
+  background-color: #ffc107;
+  color: #856404;
+}
+
+.status.completed {
+  background-color: #28a745;
+  color: white;
+}
+
+/* Placement Section */
+.placement-section {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.status-card {
+  background-color: #f8f9fa;
+  padding: 25px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.status-active {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.update-btn {
+  margin-top: 20px;
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-nav {
+    flex-direction: column;
+  }
+  
+  .dashboard-nav button {
+    padding: 12px 20px;
+  }
+  
+  .dashboard-content {
+    padding: 15px;
+  }
+  
+  .profile-section,
+  .interviews-section,
+  .placement-section {
+    padding: 20px;
+  }
+}
