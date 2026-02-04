@@ -47,14 +47,26 @@ const StudentDashboard = () => {
     });
   };
 
+  const handleLogout = () => {
+    if (window.confirm('Are you sure you want to logout?')) {
+      setShowAcademics(false);
+      alert('Logged out successfully!');
+    }
+  };
+
   return (
     <div className="dashboard">
       <div className="dashboard-header">
         <h1>Student Dashboard</h1>
         <p>Welcome, {student.name}</p>
-        <button onClick={handleProfileUpdate} className="update-profile-btn">
-          Update Profile
-        </button>
+        <div className="header-buttons">
+          <button onClick={handleProfileUpdate} className="update-profile-btn">
+            Update Profile
+          </button>
+          <button onClick={handleLogout} className="logout-btn">
+            Logout
+          </button>
+        </div>
       </div>
 
       <div className="dashboard-content">
