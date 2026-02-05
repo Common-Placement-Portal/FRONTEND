@@ -23,7 +23,7 @@ const Login = () => {
       };
       
       login(mockUser);
-      alert('Login successful!');
+      window.location.href = '/coordinator';
     } catch (err) {
       setError("Login failed. Please try again.");
     }
