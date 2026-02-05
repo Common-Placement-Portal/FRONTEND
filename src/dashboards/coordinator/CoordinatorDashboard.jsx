@@ -36,17 +36,6 @@ const CoordinatorDashboard = () => {
 
       {/* Main Content */}
       <div className="main-content">
-        <div className="dashboard-header">
-          <h1>Coordinator Dashboard</h1>
-          <p>Welcome to CDAC Placement Portal!</p>
-        </div>
-        
-        <div className="dashboard-content">
-          <div className="welcome-card">
-            <h2>Welcome to CDAC Placement Portal</h2>
-            <p>Use the sidebar to navigate through different sections.</p>
-          </div>
-        </div>
       </div>
     </div>
   );
