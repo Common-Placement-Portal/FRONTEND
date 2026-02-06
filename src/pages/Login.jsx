@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import "../styles/login.css";
 
 const Login = () => {
@@ -8,6 +9,7 @@ const Login = () => {
   const [role, setRole] = useState("student");
   const [error, setError] = useState("");
   const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,7 +25,14 @@ const Login = () => {
       };
       
       login(mockUser);
-      alert('Login successful!');
+      
+      if (role === 'company') {
+        navigate('/company/dashboard-new');
+      } else if (role === 'coordinator') {
+        navigate('/coordinator');
+      } else {
+        alert('Login successful!');
+      }
     } catch (err) {
       setError("Login failed. Please try again.");
     }

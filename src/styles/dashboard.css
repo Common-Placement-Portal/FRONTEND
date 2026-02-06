@@ -69,40 +69,12 @@
   background-color: #c82333;
 }
 
-.dashboard-nav {
-  background-color: white;
-  padding: 0;
-  display: flex;
-  border-bottom: 1px solid #ddd;
-}
-
-.dashboard-nav button {
-  padding: 15px 30px;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  font-size: 16px;
-  border-bottom: 3px solid transparent;
-  transition: all 0.3s ease;
-}
-
-.dashboard-nav button:hover {
-  background-color: #f8f9fa;
-}
-
-.dashboard-nav button.active {
-  border-bottom-color: #007bff;
-  color: #007bff;
-  font-weight: bold;
-}
-
 .dashboard-content {
   padding: 30px;
   max-width: 1000px;
   margin: 0 auto;
 }
 
-/* Profile Section */
 .profile-section {
   background-color: white;
   padding: 30px;
@@ -162,7 +134,6 @@
   background-color: #5a32a3;
 }
 
-/* Interviews Section */
 .interviews-section {
   background-color: white;
   padding: 30px;
@@ -210,34 +181,6 @@
   color: #333;
 }
 
-/* Placement Section */
-.placement-section {
-  background-color: white;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.status-card {
-  background-color: #f8f9fa;
-  padding: 25px;
-  border-radius: 8px;
-  margin-top: 20px;
-}
-
-.status-active {
-  color: #28a745;
-  font-weight: bold;
-}
-
-.update-btn {
-  margin-top: 20px;
-  padding: 12px 30px;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-/* Academics Section */
 .academics-section {
   background-color: white;
   padding: 30px;
@@ -275,21 +218,6 @@
   font-size: 16px;
 }
 
-.add-project-btn {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.add-project-btn:hover {
-  background-color: #0056b3;
-}
-
 .form-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -323,31 +251,6 @@
   resize: vertical;
 }
 
-.academic-level {
-  margin-bottom: 25px;
-  padding: 20px;
-  border: 1px solid #e9ecef;
-  border-radius: 8px;
-}
-
-.academic-level h3 {
-  margin-bottom: 15px;
-  color: #007bff;
-}
-
-.academic-fields {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
-}
-
-.academic-fields input {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
 .save-academics-btn {
   background-color: #28a745;
   color: white;
@@ -363,23 +266,13 @@
   background-color: #218838;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
-  .dashboard-nav {
-    flex-direction: column;
-  }
-  
-  .dashboard-nav button {
-    padding: 12px 20px;
-  }
-  
   .dashboard-content {
     padding: 15px;
   }
   
   .profile-section,
   .interviews-section,
-  .placement-section,
   .academics-section {
     padding: 20px;
   }
