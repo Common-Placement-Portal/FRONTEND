@@ -167,6 +167,15 @@ const StudentDashboard = () => {
               </div>
               
               <div className="form-group">
+                <label>PRN</label>
+                <input 
+                  type="text" 
+                  value={student.prn} 
+                  onChange={(e) => setStudent({...student, prn: e.target.value})}
+                />
+              </div>
+              
+              <div className="form-group">
                 <label>Name</label>
                 <input 
                   type="text" 
@@ -181,24 +190,6 @@ const StudentDashboard = () => {
                   type="email" 
                   value={student.email} 
                   onChange={(e) => setStudent({...student, email: e.target.value})}
-                />
-              </div>
-              
-              <div className="form-group">
-                <label>Phone</label>
-                <input 
-                  type="tel" 
-                  value={student.phone} 
-                  onChange={(e) => setStudent({...student, phone: e.target.value})}
-                />
-              </div>
-              
-              <div className="form-group">
-                <label>PRN</label>
-                <input 
-                  type="text" 
-                  value={student.prn} 
-                  onChange={(e) => setStudent({...student, prn: e.target.value})}
                 />
               </div>
             </form>
