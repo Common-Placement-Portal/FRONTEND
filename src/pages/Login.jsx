@@ -30,8 +30,8 @@ const Login = () => {
         navigate('/company/dashboard-new');
       } else if (role === 'coordinator') {
         navigate('/coordinator');
-      } else {
-        alert('Login successful!');
+      } else if (role === 'student') {
+        navigate('/student');
       }
     } catch (err) {
       setError("Login failed. Please try again.");
