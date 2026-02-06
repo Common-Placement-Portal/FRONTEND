@@ -20,17 +20,19 @@ const StudentDashboard = () => {
     batch: '2024',
     photo: null,
     academics: {
-      tenth: { board: '', school: '', year: '', percentage: '' },
-      twelfth: { board: '', school: '', year: '', percentage: '' },
-      diploma: { university: '', college: '', branch: '', year: '', percentage: '' },
-      degree: { university: '', college: '', branch: '', year: '', percentage: '' },
+      tenth: { board: '', school: '', year: '', cgpa: '' },
+      twelfth: { board: '', school: '', year: '', cgpa: '' },
+      diploma: { university: '', college: '', branch: '', year: '', cgpa: '' },
+      degree: { university: '', college: '', branch: '', year: '', cgpa: '' },
       postGraduation: { university: '', college: '', course: '', year: '' }
     },
-    project: {
-      title: '',
-      technology: '',
-      description: ''
-    }
+    projects: [
+      {
+        title: '',
+        technology: '',
+        description: ''
+      }
+    ]
   });
 
   const [interviews] = useState([
@@ -94,13 +96,16 @@ const StudentDashboard = () => {
     });
   };
 
-  const handleProjectChange = (field, value) => {
+  const handleProjectChange = (index, field, value) => {
+    const updatedProjects = [...student.projects];
+    updatedProjects[index][field] = value;
+    setStudent({ ...student, projects: updatedProjects });
+  };
+
+  const addProject = () => {
     setStudent({
       ...student,
-      project: {
-        ...student.project,
-        [field]: value
-      }
+      projects: [...student.projects, { title: '', technology: '', description: '' }]
     });
   };
 
@@ -264,8 +269,8 @@ const StudentDashboard = () => {
                 <input value={student.academics.tenth.year} onChange={(e) => handleAcademicChange('tenth', 'year', e.target.value)} />
               </div>
               <div className="form-group">
-                <label>Percentage</label>
-                <input value={student.academics.tenth.percentage} onChange={(e) => handleAcademicChange('tenth', 'percentage', e.target.value)} />
+                <label>CGPA</label>
+                <input value={student.academics.tenth.cgpa} onChange={(e) => handleAcademicChange('tenth', 'cgpa', e.target.value)} />
               </div>
             </div>
 
@@ -284,8 +289,8 @@ const StudentDashboard = () => {
                 <input value={student.academics.twelfth.year} onChange={(e) => handleAcademicChange('twelfth', 'year', e.target.value)} />
               </div>
               <div className="form-group">
-                <label>Percentage</label>
-                <input value={student.academics.twelfth.percentage} onChange={(e) => handleAcademicChange('twelfth', 'percentage', e.target.value)} />
+                <label>CGPA</label>
+                <input value={student.academics.twelfth.cgpa} onChange={(e) => handleAcademicChange('twelfth', 'cgpa', e.target.value)} />
               </div>
             </div>
 
@@ -308,8 +313,8 @@ const StudentDashboard = () => {
                 <input value={student.academics.diploma.year} onChange={(e) => handleAcademicChange('diploma', 'year', e.target.value)} />
               </div>
               <div className="form-group">
-                <label>Percentage</label>
-                <input value={student.academics.diploma.percentage} onChange={(e) => handleAcademicChange('diploma', 'percentage', e.target.value)} />
+                <label>CGPA</label>
+                <input value={student.academics.diploma.cgpa} onChange={(e) => handleAcademicChange('diploma', 'cgpa', e.target.value)} />
               </div>
             </div>
 
@@ -332,8 +337,8 @@ const StudentDashboard = () => {
                 <input value={student.academics.degree.year} onChange={(e) => handleAcademicChange('degree', 'year', e.target.value)} />
               </div>
               <div className="form-group">
-                <label>Percentage</label>
-                <input value={student.academics.degree.percentage} onChange={(e) => handleAcademicChange('degree', 'percentage', e.target.value)} />
+                <label>CGPA</label>
+                <input value={student.academics.degree.cgpa} onChange={(e) => handleAcademicChange('degree', 'cgpa', e.target.value)} />
               </div>
             </div>
 
@@ -358,20 +363,26 @@ const StudentDashboard = () => {
             </div>
 
             <h2>Project</h2>
-            <div className="form-grid">
-              <div className="form-group">
-                <label>Title</label>
-                <input value={student.project.title} onChange={(e) => handleProjectChange('title', e.target.value)} />
+            {student.projects.map((project, index) => (
+              <div key={index} className="project-section">
+                <h3>Project {index + 1}</h3>
+                <div className="form-grid">
+                  <div className="form-group">
+                    <label>Title</label>
+                    <input value={project.title} onChange={(e) => handleProjectChange(index, 'title', e.target.value)} />
+                  </div>
+                  <div className="form-group">
+                    <label>Technology Used</label>
+                    <input value={project.technology} onChange={(e) => handleProjectChange(index, 'technology', e.target.value)} />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label>Description</label>
+                  <textarea value={project.description} onChange={(e) => handleProjectChange(index, 'description', e.target.value)} />
+                </div>
               </div>
-              <div className="form-group">
-                <label>Technology Used</label>
-                <input value={student.project.technology} onChange={(e) => handleProjectChange('technology', e.target.value)} />
-              </div>
-            </div>
-            <div className="form-group">
-              <label>Description</label>
-              <textarea value={student.project.description} onChange={(e) => handleProjectChange('description', e.target.value)} />
-            </div>
+            ))}
+            <button className="add-project-btn" onClick={addProject}>+ Add Project</button>
             
             <button className="save-academics-btn" onClick={() => alert('Profile updated successfully!')}>Save Profile</button>
           </div>
