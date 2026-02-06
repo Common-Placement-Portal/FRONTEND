@@ -3,6 +3,7 @@ import '../../styles/dashboard.css';
 
 const StudentDashboard = () => {
   const [showAcademics, setShowAcademics] = useState(false);
+  const [showInterviews, setShowInterviews] = useState(false);
   const [student, setStudent] = useState({
     firstName: 'Rahul',
     lastName: 'Sharma',
@@ -32,6 +33,33 @@ const StudentDashboard = () => {
     }
   });
 
+  const [interviews] = useState([
+    {
+      company: 'Infosys',
+      date: '2024-01-25',
+      time: '10:00 AM',
+      round: 'Technical Round'
+    },
+    {
+      company: 'Accenture',
+      date: '2024-01-28',
+      time: '2:00 PM',
+      round: 'HR Round'
+    },
+    {
+      company: 'TCS',
+      date: '2024-02-02',
+      time: '11:30 AM',
+      round: 'Technical Round'
+    },
+    {
+      company: 'Wipro',
+      date: '2024-02-05',
+      time: '3:00 PM',
+      round: 'Managerial Round'
+    }
+  ]);
+
   const handlePhotoUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -45,6 +73,12 @@ const StudentDashboard = () => {
 
   const handleProfileUpdate = () => {
     setShowAcademics(!showAcademics);
+    setShowInterviews(false);
+  };
+
+  const handleShowInterviews = () => {
+    setShowInterviews(!showInterviews);
+    setShowAcademics(false);
   };
 
   const handleAcademicChange = (level, field, value) => {
@@ -73,6 +107,7 @@ const StudentDashboard = () => {
   const handleLogout = () => {
     if (window.confirm('Are you sure you want to logout?')) {
       setShowAcademics(false);
+      setShowInterviews(false);
       alert('Logged out successfully!');
     }
   };
@@ -83,6 +118,9 @@ const StudentDashboard = () => {
         <h1>Student Dashboard</h1>
         <p>Welcome, {student.firstName} {student.lastName}</p>
         <div className="header-buttons">
+          <button onClick={handleShowInterviews} className="interviews-btn">
+            Scheduled Interviews
+          </button>
           <button onClick={handleProfileUpdate} className="update-profile-btn">
             Update Profile
           </button>
@@ -93,7 +131,21 @@ const StudentDashboard = () => {
       </div>
 
       <div className="dashboard-content">
-        {!showAcademics ? (
+        {showInterviews ? (
+          <div className="interviews-section">
+            <h2>Scheduled Interviews</h2>
+            <div className="interviews-grid">
+              {interviews.map((interview, index) => (
+                <div key={index} className="interview-card">
+                  <h3>{interview.company}</h3>
+                  <p><strong>Date:</strong> {interview.date}</p>
+                  <p><strong>Time:</strong> {interview.time}</p>
+                  <p><strong>Round:</strong> {interview.round}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : !showAcademics ? (
           <div className="profile-section">
             <h2>Profile Information</h2>
             <form>
