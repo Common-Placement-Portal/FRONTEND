@@ -123,11 +123,11 @@ const StudentDashboard = () => {
         <h1>Student Dashboard</h1>
         <p>Welcome, {student.firstName} {student.lastName}</p>
         <div className="header-buttons">
-          <button onClick={handleShowInterviews} className="interviews-btn">
-            Scheduled Interviews
-          </button>
           <button onClick={handleProfileUpdate} className="update-profile-btn">
             Update Profile
+          </button>
+          <button onClick={handleShowInterviews} className="interviews-btn">
+            Scheduled Interviews
           </button>
           <button onClick={handleLogout} className="logout-btn">
             Logout
@@ -382,7 +382,6 @@ const StudentDashboard = () => {
                 </div>
               </div>
             ))}
-            <button className="add-project-btn" onClick={addProject}>+ Add Project</button>
             
             <button className="save-academics-btn" onClick={() => alert('Profile updated successfully!')}>Save Profile</button>
           </div>
