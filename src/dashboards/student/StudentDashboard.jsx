@@ -4,18 +4,31 @@ import '../../styles/dashboard.css';
 const StudentDashboard = () => {
   const [showAcademics, setShowAcademics] = useState(false);
   const [student, setStudent] = useState({
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    phone: '9876543210',
+    firstName: 'Rahul',
+    lastName: 'Sharma',
+    email: 'rahul.sharma@gmail.com',
+    phone: '9823456789',
+    prn: '2024001234',
+    dob: '1999-08-20',
+    gender: 'Male',
+    address: '45, Kothrud, Pune',
+    city: 'Pune',
+    state: 'Maharashtra',
+    pincode: '411038',
     course: 'PG-DAC',
     batch: '2024',
     photo: null,
     academics: {
-      tenth: { year: '', percentage: '', board: '' },
-      twelfth: { year: '', percentage: '', board: '' },
-      diploma: { year: '', percentage: '', university: '' },
-      graduation: { year: '', percentage: '', university: '' },
-      postGraduation: { year: '', percentage: '', university: '' }
+      tenth: { board: '', school: '', year: '', percentage: '' },
+      twelfth: { board: '', school: '', year: '', percentage: '' },
+      diploma: { university: '', college: '', branch: '', year: '', percentage: '' },
+      degree: { university: '', college: '', branch: '', year: '', percentage: '' },
+      postGraduation: { university: '', college: '', course: '', year: '' }
+    },
+    project: {
+      title: '',
+      technology: '',
+      description: ''
     }
   });
 
@@ -47,6 +60,16 @@ const StudentDashboard = () => {
     });
   };
 
+  const handleProjectChange = (field, value) => {
+    setStudent({
+      ...student,
+      project: {
+        ...student.project,
+        [field]: value
+      }
+    });
+  };
+
   const handleLogout = () => {
     if (window.confirm('Are you sure you want to logout?')) {
       setShowAcademics(false);
@@ -58,7 +81,7 @@ const StudentDashboard = () => {
     <div className="dashboard">
       <div className="dashboard-header">
         <h1>Student Dashboard</h1>
-        <p>Welcome, {student.name}</p>
+        <p>Welcome, {student.firstName} {student.lastName}</p>
         <div className="header-buttons">
           <button onClick={handleProfileUpdate} className="update-profile-btn">
             Update Profile
@@ -79,18 +102,19 @@ const StudentDashboard = () => {
                   {student.photo ? (
                     <img src={student.photo} alt="Profile" />
                   ) : (
-                    <div className="photo-placeholder">No Photo</div>
+                    <div className="photo-placeholder">{student.firstName.charAt(0)}{student.lastName.charAt(0)}</div>
                   )}
                 </div>
-                <input type="file" accept="image/*" onChange={handlePhotoUpload} />
+                <button type="button" className="change-photo-btn" onClick={() => document.getElementById('photoInput').click()}>Change Photo</button>
+                <input id="photoInput" type="file" accept="image/*" onChange={handlePhotoUpload} style={{display: 'none'}} />
               </div>
               
               <div className="form-group">
                 <label>Name</label>
                 <input 
                   type="text" 
-                  value={student.name} 
-                  onChange={(e) => setStudent({...student, name: e.target.value})}
+                  value={student.firstName + ' ' + student.lastName} 
+                  onChange={(e) => setStudent({...student, firstName: e.target.value.split(' ')[0], lastName: e.target.value.split(' ')[1] || ''})}
                 />
               </div>
               
@@ -115,54 +139,189 @@ const StudentDashboard = () => {
           </div>
         ) : (
           <div className="academics-section">
-            <h2>Academic Details</h2>
-            
-            <div className="academic-level">
-              <h3>10th Standard</h3>
-              <div className="academic-fields">
-                <input placeholder="Year" value={student.academics.tenth.year} onChange={(e) => handleAcademicChange('tenth', 'year', e.target.value)} />
-                <input placeholder="Percentage" value={student.academics.tenth.percentage} onChange={(e) => handleAcademicChange('tenth', 'percentage', e.target.value)} />
-                <input placeholder="Board" value={student.academics.tenth.board} onChange={(e) => handleAcademicChange('tenth', 'board', e.target.value)} />
+            <h2>Personal Information</h2>
+            <div className="form-grid">
+              <div className="form-group">
+                <label>First Name</label>
+                <input value={student.firstName} onChange={(e) => setStudent({...student, firstName: e.target.value})} />
+              </div>
+              <div className="form-group">
+                <label>Last Name</label>
+                <input value={student.lastName} onChange={(e) => setStudent({...student, lastName: e.target.value})} />
+              </div>
+              <div className="form-group">
+                <label>Email</label>
+                <input value={student.email} onChange={(e) => setStudent({...student, email: e.target.value})} />
+              </div>
+              <div className="form-group">
+                <label>Phone</label>
+                <input value={student.phone} onChange={(e) => setStudent({...student, phone: e.target.value})} />
+              </div>
+              <div className="form-group">
+                <label>PRN</label>
+                <input value={student.prn} onChange={(e) => setStudent({...student, prn: e.target.value})} />
+              </div>
+              <div className="form-group">
+                <label>Date of Birth</label>
+                <input type="date" value={student.dob} onChange={(e) => setStudent({...student, dob: e.target.value})} />
+              </div>
+              <div className="form-group">
+                <label>Gender</label>
+                <select value={student.gender} onChange={(e) => setStudent({...student, gender: e.target.value})}>
+                  <option>Male</option>
+                  <option>Female</option>
+                  <option>Other</option>
+                </select>
               </div>
             </div>
             
-            <div className="academic-level">
-              <h3>12th Standard</h3>
-              <div className="academic-fields">
-                <input placeholder="Year" value={student.academics.twelfth.year} onChange={(e) => handleAcademicChange('twelfth', 'year', e.target.value)} />
-                <input placeholder="Percentage" value={student.academics.twelfth.percentage} onChange={(e) => handleAcademicChange('twelfth', 'percentage', e.target.value)} />
-                <input placeholder="Board" value={student.academics.twelfth.board} onChange={(e) => handleAcademicChange('twelfth', 'board', e.target.value)} />
-              </div>
+            <div className="form-group">
+              <label>Address</label>
+              <textarea value={student.address} onChange={(e) => setStudent({...student, address: e.target.value})} />
             </div>
             
-            <div className="academic-level">
-              <h3>Diploma</h3>
-              <div className="academic-fields">
-                <input placeholder="Year" value={student.academics.diploma.year} onChange={(e) => handleAcademicChange('diploma', 'year', e.target.value)} />
-                <input placeholder="Percentage" value={student.academics.diploma.percentage} onChange={(e) => handleAcademicChange('diploma', 'percentage', e.target.value)} />
-                <input placeholder="University" value={student.academics.diploma.university} onChange={(e) => handleAcademicChange('diploma', 'university', e.target.value)} />
+            <div className="form-grid">
+              <div className="form-group">
+                <label>City</label>
+                <input value={student.city} onChange={(e) => setStudent({...student, city: e.target.value})} />
+              </div>
+              <div className="form-group">
+                <label>State</label>
+                <input value={student.state} onChange={(e) => setStudent({...student, state: e.target.value})} />
+              </div>
+              <div className="form-group">
+                <label>Pincode</label>
+                <input value={student.pincode} onChange={(e) => setStudent({...student, pincode: e.target.value})} />
               </div>
             </div>
+
+            <h2>Academic Information</h2>
             
-            <div className="academic-level">
-              <h3>Graduation</h3>
-              <div className="academic-fields">
-                <input placeholder="Year" value={student.academics.graduation.year} onChange={(e) => handleAcademicChange('graduation', 'year', e.target.value)} />
-                <input placeholder="Percentage" value={student.academics.graduation.percentage} onChange={(e) => handleAcademicChange('graduation', 'percentage', e.target.value)} />
-                <input placeholder="University" value={student.academics.graduation.university} onChange={(e) => handleAcademicChange('graduation', 'university', e.target.value)} />
+            <h3>10th Class</h3>
+            <div className="form-grid">
+              <div className="form-group">
+                <label>Board</label>
+                <input value={student.academics.tenth.board} onChange={(e) => handleAcademicChange('tenth', 'board', e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label>School</label>
+                <input value={student.academics.tenth.school} onChange={(e) => handleAcademicChange('tenth', 'school', e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label>Year of Completion</label>
+                <input value={student.academics.tenth.year} onChange={(e) => handleAcademicChange('tenth', 'year', e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label>Percentage</label>
+                <input value={student.academics.tenth.percentage} onChange={(e) => handleAcademicChange('tenth', 'percentage', e.target.value)} />
               </div>
             </div>
-            
-            <div className="academic-level">
-              <h3>Post Graduation</h3>
-              <div className="academic-fields">
-                <input placeholder="Year" value={student.academics.postGraduation.year} onChange={(e) => handleAcademicChange('postGraduation', 'year', e.target.value)} />
-                <input placeholder="Percentage" value={student.academics.postGraduation.percentage} onChange={(e) => handleAcademicChange('postGraduation', 'percentage', e.target.value)} />
-                <input placeholder="University" value={student.academics.postGraduation.university} onChange={(e) => handleAcademicChange('postGraduation', 'university', e.target.value)} />
+
+            <h3>12th Class</h3>
+            <div className="form-grid">
+              <div className="form-group">
+                <label>Board</label>
+                <input value={student.academics.twelfth.board} onChange={(e) => handleAcademicChange('twelfth', 'board', e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label>School</label>
+                <input value={student.academics.twelfth.school} onChange={(e) => handleAcademicChange('twelfth', 'school', e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label>Year of Completion</label>
+                <input value={student.academics.twelfth.year} onChange={(e) => handleAcademicChange('twelfth', 'year', e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label>Percentage</label>
+                <input value={student.academics.twelfth.percentage} onChange={(e) => handleAcademicChange('twelfth', 'percentage', e.target.value)} />
               </div>
             </div>
+
+            <h3>Diploma</h3>
+            <div className="form-grid">
+              <div className="form-group">
+                <label>University</label>
+                <input value={student.academics.diploma.university} onChange={(e) => handleAcademicChange('diploma', 'university', e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label>College</label>
+                <input value={student.academics.diploma.college} onChange={(e) => handleAcademicChange('diploma', 'college', e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label>Branch</label>
+                <input value={student.academics.diploma.branch} onChange={(e) => handleAcademicChange('diploma', 'branch', e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label>Year of Completion</label>
+                <input value={student.academics.diploma.year} onChange={(e) => handleAcademicChange('diploma', 'year', e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label>Percentage</label>
+                <input value={student.academics.diploma.percentage} onChange={(e) => handleAcademicChange('diploma', 'percentage', e.target.value)} />
+              </div>
+            </div>
+
+            <h3>Degree</h3>
+            <div className="form-grid">
+              <div className="form-group">
+                <label>University</label>
+                <input value={student.academics.degree.university} onChange={(e) => handleAcademicChange('degree', 'university', e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label>College</label>
+                <input value={student.academics.degree.college} onChange={(e) => handleAcademicChange('degree', 'college', e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label>Branch</label>
+                <input value={student.academics.degree.branch} onChange={(e) => handleAcademicChange('degree', 'branch', e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label>Year of Completion</label>
+                <input value={student.academics.degree.year} onChange={(e) => handleAcademicChange('degree', 'year', e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label>Percentage</label>
+                <input value={student.academics.degree.percentage} onChange={(e) => handleAcademicChange('degree', 'percentage', e.target.value)} />
+              </div>
+            </div>
+
+            <h3>Post Graduation</h3>
+            <div className="form-grid">
+              <div className="form-group">
+                <label>University</label>
+                <input value={student.academics.postGraduation.university} onChange={(e) => handleAcademicChange('postGraduation', 'university', e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label>College</label>
+                <input value={student.academics.postGraduation.college} onChange={(e) => handleAcademicChange('postGraduation', 'college', e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label>Course</label>
+                <input value={student.academics.postGraduation.course} onChange={(e) => handleAcademicChange('postGraduation', 'course', e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label>Year of Completion</label>
+                <input value={student.academics.postGraduation.year} onChange={(e) => handleAcademicChange('postGraduation', 'year', e.target.value)} />
+              </div>
+            </div>
+
+            <h2>Project</h2>
+            <div className="form-grid">
+              <div className="form-group">
+                <label>Title</label>
+                <input value={student.project.title} onChange={(e) => handleProjectChange('title', e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label>Technology Used</label>
+                <input value={student.project.technology} onChange={(e) => handleProjectChange('technology', e.target.value)} />
+              </div>
+            </div>
+            <div className="form-group">
+              <label>Description</label>
+              <textarea value={student.project.description} onChange={(e) => handleProjectChange('description', e.target.value)} />
+            </div>
             
-            <button className="save-academics-btn" onClick={() => alert('Academic details saved!')}>Save Academic Details</button>
+            <button className="save-academics-btn" onClick={() => alert('Profile updated successfully!')}>Save Profile</button>
           </div>
         )}
       </div>
