@@ -50,27 +50,31 @@ const CoordinatorDashboard = () => {
             <form className="dashboard-form">
               <div className="form-row">
                 <div className="form-group">
-                  <label>Full Name</label>
-                  <input type="text" className="form-input" placeholder="Enter student name" />
+                  <label>First Name</label>
+                  <input type="text" className="form-input" placeholder="Enter first name" />
                 </div>
+                <div className="form-group">
+                  <label>Last Name</label>
+                  <input type="text" className="form-input" placeholder="Enter last name" />
+                </div>
+              </div>
+              
+              <div className="form-row">
                 <div className="form-group">
                   <label>Email</label>
                   <input type="email" className="form-input" placeholder="Enter email" />
                 </div>
-              </div>
-              
-              <div className="form-row">
                 <div className="form-group">
                   <label>Phone</label>
                   <input type="tel" className="form-input" placeholder="Enter phone number" />
                 </div>
+              </div>
+              
+              <div className="form-row">
                 <div className="form-group">
                   <label>PRN</label>
                   <input type="text" className="form-input" placeholder="Enter PRN" />
                 </div>
-              </div>
-              
-              <div className="form-row">
                 <div className="form-group">
                   <label>Course</label>
                   <select className="form-input">
@@ -79,10 +83,6 @@ const CoordinatorDashboard = () => {
                     <option>PG-DBDA</option>
                     <option>PG-DITISS</option>
                   </select>
-                </div>
-                <div className="form-group">
-                  <label>Batch</label>
-                  <input type="text" className="form-input" placeholder="Enter batch" />
                 </div>
               </div>
               
