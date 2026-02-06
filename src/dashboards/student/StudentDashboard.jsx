@@ -205,6 +205,18 @@ const StudentDashboard = () => {
           </div>
         ) : (
           <div className="academics-section">
+            <div className="photo-upload">
+              <div className="photo-preview">
+                {student.photo ? (
+                  <img src={student.photo} alt="Profile" />
+                ) : (
+                  <div className="photo-placeholder">{student.firstName.charAt(0)}{student.lastName.charAt(0)}</div>
+                )}
+              </div>
+              <button type="button" className="change-photo-btn" onClick={() => document.getElementById('photoInput2').click()}>Change Photo</button>
+              <input id="photoInput2" type="file" accept="image/*" onChange={handlePhotoUpload} style={{display: 'none'}} />
+            </div>
+            
             <h2>Personal Information</h2>
             <div className="form-grid">
               <div className="form-group">
