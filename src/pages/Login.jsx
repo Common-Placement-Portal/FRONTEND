@@ -28,6 +28,8 @@ const Login = () => {
       
       if (role === 'company') {
         navigate('/company/dashboard-new');
+      } else if (role === 'coordinator') {
+        navigate('/coordinator');
       } else {
         alert('Login successful!');
       }
