@@ -192,6 +192,15 @@ const StudentDashboard = () => {
                   onChange={(e) => setStudent({...student, phone: e.target.value})}
                 />
               </div>
+              
+              <div className="form-group">
+                <label>PRN</label>
+                <input 
+                  type="text" 
+                  value={student.prn} 
+                  onChange={(e) => setStudent({...student, prn: e.target.value})}
+                />
+              </div>
             </form>
           </div>
         ) : (
