@@ -108,7 +108,58 @@ const CompanyDashboard = () => {
             </>
           )}
 
-          {activeSection === "shortlist" && <h2>Shortlist Students</h2>}
+          {activeSection === "shortlist" && (
+  <>
+    <h2>Shortlist Students</h2>
+
+    <div className="filter-section">
+      <div className="filter-row">
+        <select name="course">
+          <option value="">Select Course</option>
+          <option value="PG-DAC">PG-DAC</option>
+          <option value="DBDA">DBDA</option>
+          <option value="DITISS">DITISS</option>
+        </select>
+
+        <input
+          type="number"
+          placeholder="Minimum Percentage"
+          name="minPercentage"
+        />
+
+        <select name="year">
+          <option value="">Passout Year</option>
+          <option value="2024">2024</option>
+          <option value="2023">2023</option>
+          <option value="2022">2022</option>
+        </select>
+
+        <button className="search-btn">Search</button>
+      </div>
+    </div>
+
+    <div className="students-list">
+      <div className="student-card">
+        <h4>Rahul Sharma</h4>
+        <p>Course: PG-DAC</p>
+        <p>Percentage: 78%</p>
+        <button className="schedule-btn">
+          Schedule Interview
+        </button>
+      </div>
+
+      <div className="student-card">
+        <h4>Priya Patil</h4>
+        <p>Course: DBDA</p>
+        <p>Percentage: 82%</p>
+        <button className="schedule-btn">
+          Schedule Interview
+        </button>
+      </div>
+    </div>
+  </>
+)}
+
           {activeSection === "schedule" && <h2>Schedule Interview</h2>}
         </section>
       </main>
