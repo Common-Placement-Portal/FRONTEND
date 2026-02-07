@@ -4,6 +4,7 @@ import '../../styles/dashboard.css';
 const StudentDashboard = () => {
   const [showAcademics, setShowAcademics] = useState(false);
   const [showInterviews, setShowInterviews] = useState(false);
+  const [showSelections, setShowSelections] = useState(false);
   const [student, setStudent] = useState({
     firstName: 'Rahul',
     lastName: 'Sharma',
@@ -62,6 +63,17 @@ const StudentDashboard = () => {
     }
   ]);
 
+  const [selections] = useState([
+    {
+      company: 'TCS',
+      position: 'Software Developer',
+      package: '4.5 LPA',
+      bond: '2 years',
+      year: '2024',
+      status: 'SELECTED'
+    }
+  ]);
+
   const handlePhotoUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -76,11 +88,19 @@ const StudentDashboard = () => {
   const handleProfileUpdate = () => {
     setShowAcademics(!showAcademics);
     setShowInterviews(false);
+    setShowSelections(false);
   };
 
   const handleShowInterviews = () => {
     setShowInterviews(!showInterviews);
     setShowAcademics(false);
+    setShowSelections(false);
+  };
+
+  const handleShowSelections = () => {
+    setShowSelections(!showSelections);
+    setShowAcademics(false);
+    setShowInterviews(false);
   };
 
   const handleAcademicChange = (level, field, value) => {
@@ -129,6 +149,9 @@ const StudentDashboard = () => {
           <button onClick={handleShowInterviews} className="interviews-btn">
             Scheduled Interviews
           </button>
+          <button onClick={handleShowSelections} className="selections-btn">
+            My Selections
+          </button>
           <button onClick={handleLogout} className="logout-btn">
             Logout
           </button>
@@ -136,7 +159,25 @@ const StudentDashboard = () => {
       </div>
 
       <div className="dashboard-content">
-        {showInterviews ? (
+        {showSelections ? (
+          <div className="selections-section">
+            <h2>My Selections</h2>
+            <div className="selections-grid">
+              {selections.map((selection, index) => (
+                <div key={index} className="selection-card">
+                  <div className="selection-header">
+                    <h3>{selection.company}</h3>
+                    <span className="status-badge">{selection.status}</span>
+                  </div>
+                  <p><strong>Position:</strong> {selection.position}</p>
+                  <p><strong>Package:</strong> {selection.package}</p>
+                  <p><strong>Bond:</strong> {selection.bond}</p>
+                  <p><strong>Year:</strong> {selection.year}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : showInterviews ? (
           <div className="interviews-section">
             <h2>Scheduled Interviews</h2>
             <div className="interviews-grid">

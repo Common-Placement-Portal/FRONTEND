@@ -39,6 +39,21 @@
   background-color: #5a32a3;
 }
 
+.selections-btn {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.selections-btn:hover {
+  background-color: #138496;
+}
+
 .update-profile-btn {
   background-color: #28a745;
   color: white;
@@ -145,6 +160,69 @@
   color: #333;
   margin-bottom: 25px;
   text-align: center;
+}
+
+.selections-section {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.selections-section h2 {
+  color: #333;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.selections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.selection-card {
+  background-color: #f8f9fa;
+  border: 2px solid #28a745;
+  border-radius: 8px;
+  padding: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.selection-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.selection-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.selection-card h3 {
+  color: #007bff;
+  margin: 0;
+  font-size: 20px;
+}
+
+.status-badge {
+  background-color: #28a745;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.selection-card p {
+  margin: 8px 0;
+  color: #555;
+}
+
+.selection-card strong {
+  color: #333;
 }
 
 .interviews-grid {
