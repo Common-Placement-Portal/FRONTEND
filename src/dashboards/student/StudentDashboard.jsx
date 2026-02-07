@@ -139,27 +139,72 @@ const StudentDashboard = () => {
   };
 
   return (
-    <div className="dashboard">
-      <div className="dashboard-header">
-        <h1>Student Dashboard</h1>
-        <p>Welcome, {student.firstName} {student.lastName}</p>
-        <div className="header-buttons">
-          <button onClick={handleProfileUpdate} className="update-profile-btn">
-            Update Profile
-          </button>
-          <button onClick={handleShowInterviews} className="interviews-btn">
-            Scheduled Interviews
-          </button>
-          <button onClick={handleShowSelections} className="selections-btn">
-            My Selections
-          </button>
-          <button onClick={handleLogout} className="logout-btn">
-            Logout
-          </button>
+    <div className="student-dashboard">
+      <div className="sidebar">
+        <div className="profile-card">
+          <div className="profile-avatar">
+            {student.photo ? (
+              <img src={student.photo} alt="Profile" />
+            ) : (
+              <div className="avatar-placeholder">PM</div>
+            )}
+          </div>
+          <h3>{student.firstName} {student.lastName}</h3>
+          <p>{student.course}</p>
         </div>
+        
+        <nav className="sidebar-nav">
+          <button 
+            className={`nav-item ${!showAcademics && !showInterviews && !showSelections ? 'active' : ''}`}
+            onClick={() => {
+              setShowAcademics(false);
+              setShowInterviews(false);
+              setShowSelections(false);
+            }}
+          >
+            <span className="nav-icon">👤</span> My Profile
+          </button>
+          <button 
+            className={`nav-item ${showAcademics ? 'active' : ''}`}
+            onClick={handleProfileUpdate}
+          >
+            <span className="nav-icon">✏️</span> Update Profile
+          </button>
+          <button 
+            className={`nav-item ${showInterviews ? 'active' : ''}`}
+            onClick={handleShowInterviews}
+          >
+            <span className="nav-icon">📅</span> Interviews
+          </button>
+          <button 
+            className={`nav-item ${showSelections ? 'active' : ''}`}
+            onClick={handleShowSelections}
+          >
+            <span className="nav-icon">📋</span> Selections
+          </button>
+        </nav>
       </div>
 
-      <div className="dashboard-content">
+      <div className="main-content">
+        <div className="top-navbar">
+          <div className="navbar-brand">
+            <span className="cdac-logo">CDAC</span>
+            <div>
+              <h4>CDAC Placement Portal</h4>
+              <p>Authorized Training Centre</p>
+            </div>
+          </div>
+          <div className="navbar-links">
+            <a href="/">Home</a>
+            <a href="/">About Us</a>
+            <a href="/">Placement</a>
+            <a href="/">Contact Us</a>
+            <a href="/">Dashboard</a>
+            <button onClick={handleLogout} className="logout-btn">Logout</button>
+          </div>
+        </div>
+
+        <div className="content-area">
         {showSelections ? (
           <div className="selections-section">
             <h2>My Selections</h2>
@@ -440,6 +485,7 @@ const StudentDashboard = () => {
             <button className="save-academics-btn" onClick={() => alert('Profile updated successfully!')}>Save Profile</button>
           </div>
         )}
+        </div>
       </div>
     </div>
   );
