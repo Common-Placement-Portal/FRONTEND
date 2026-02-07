@@ -115,3 +115,53 @@
 .submit-btn:hover {
   background: #7b1fa2;
 }
+
+
+.filter-section {
+  margin-bottom: 25px;
+}
+
+.filter-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+}
+
+.search-btn {
+  background: #4a148c;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.search-btn:hover {
+  background: #7b1fa2;
+}
+
+.students-list {
+  display: grid;
+  gap: 15px;
+}
+
+.student-card {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  border-left: 4px solid #4a148c;
+}
+
+.schedule-btn {
+  margin-top: 10px;
+  background: #007bff;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.schedule-btn:hover {
+  background: #0056b3;
+}
