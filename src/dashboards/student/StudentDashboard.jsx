@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/dashboard.css';
 
 const StudentDashboard = () => {
@@ -129,11 +130,11 @@ const StudentDashboard = () => {
     });
   };
 
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     if (window.confirm('Are you sure you want to logout?')) {
-      setShowAcademics(false);
-      setShowInterviews(false);
-      alert('Logged out successfully!');
+      navigate('/');
     }
   };
 
