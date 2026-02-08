@@ -183,26 +183,24 @@ const CompanyDashboard = () => {
     <div className="students-list">
             
 
-      <div className="student-card">
-        <h4>Rahul Sharma</h4>
-        <p>Course: PG-DAC</p>
-        <p>Percentage: 78%</p>
-        <button className="schedule-btn">
-          Schedule Interview
-        </button>
-      </div>
-
-      <div className="student-card">
-        <h4>Priya Patil</h4>
-        <p>Course: DBDA</p>
-        <p>Percentage: 82%</p>
-        <button className="schedule-btn">
-          Schedule Interview
-        </button>
-      </div>
-    </div>
-  </>
-)}
+      {filteredStudents.length > 0 ? (
+                  filteredStudents.map((student) => (
+                    <div key={student.id} className="student-card">
+                      <h4>{student.name}</h4>
+                      <p>Course: {student.course}</p>
+                      <p>Percentage: {student.percentage}%</p>
+                      <p>Year: {student.year}</p>
+                      <button className="schedule-btn">
+                        Schedule Interview
+                      </button>
+                    </div>
+                  ))
+                ) : (
+                  <p>No students match the criteria.</p>
+                )}
+              </div>
+            </>
+          )}
 
           {activeSection === "schedule" && <h2>Schedule Interview</h2>}
         </section>
