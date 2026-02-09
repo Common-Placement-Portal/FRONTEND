@@ -74,10 +74,27 @@ const CompanyDashboard = () => {
   };
 
   const handleInterviewSubmit = (e) => {
-    e.preventDefault();
-    console.log("Interview Data:", interviewForm);
-    alert("Interview Scheduled (UI only)");
+  e.preventDefault();
+
+  const newInterview = {
+    id: Date.now(),
+    ...interviewForm,
   };
+
+  setScheduledInterviews([...scheduledInterviews, newInterview]);
+
+  setInterviewForm({
+    studentId: "",
+    interviewDate: "",
+    mode: "Online",
+    link: "",
+    location: "",
+  });
+
+  alert("Interview Scheduled Successfully");
+};
+
+const [scheduledInterviews, setScheduledInterviews] = useState([]);
 
   return (
     <div className="company-dashboard">
@@ -162,59 +179,84 @@ const CompanyDashboard = () => {
           )}
 
           {/* SCHEDULE */}
-          {activeSection === "schedule" && (
-            <>
-              <h2>Schedule Interview</h2>
+         {activeSection === "schedule" && (
+  <>
+    <h2>Schedule Interview</h2>
 
-              <form className="job-form" onSubmit={handleInterviewSubmit}>
-                <input
-                  type="number"
-                  name="studentId"
-                  placeholder="Student ID"
-                  value={interviewForm.studentId}
-                  onChange={handleInterviewChange}
-                  required
-                />
+    <form className="job-form" onSubmit={handleInterviewSubmit}>
+      <input
+        type="number"
+        name="studentId"
+        placeholder="Student ID"
+        value={interviewForm.studentId}
+        onChange={handleInterviewChange}
+        required
+      />
 
-                <input
-                  type="datetime-local"
-                  name="interviewDate"
-                  value={interviewForm.interviewDate}
-                  onChange={handleInterviewChange}
-                  required
-                />
+      <input
+        type="datetime-local"
+        name="interviewDate"
+        value={interviewForm.interviewDate}
+        onChange={handleInterviewChange}
+        required
+      />
 
-                <select name="mode" value={interviewForm.mode} onChange={handleInterviewChange}>
-                  <option value="Online">Online</option>
-                  <option value="Offline">Offline</option>
-                </select>
+      <select
+        name="mode"
+        value={interviewForm.mode}
+        onChange={handleInterviewChange}
+      >
+        <option value="Online">Online</option>
+        <option value="Offline">Offline</option>
+      </select>
 
-                {interviewForm.mode === "Online" && (
-                  <input
-                    type="url"
-                    name="link"
-                    placeholder="Meeting Link"
-                    value={interviewForm.link}
-                    onChange={handleInterviewChange}
-                  />
-                )}
+      {interviewForm.mode === "Online" && (
+        <input
+          type="url"
+          name="link"
+          placeholder="Meeting Link"
+          value={interviewForm.link}
+          onChange={handleInterviewChange}
+        />
+      )}
 
-                {interviewForm.mode === "Offline" && (
-                  <input
-                    type="text"
-                    name="location"
-                    placeholder="Interview Location"
-                    value={interviewForm.location}
-                    onChange={handleInterviewChange}
-                  />
-                )}
+      {interviewForm.mode === "Offline" && (
+        <input
+          type="text"
+          name="location"
+          placeholder="Interview Location"
+          value={interviewForm.location}
+          onChange={handleInterviewChange}
+        />
+      )}
 
-                <button type="submit" className="submit-btn">
-                  Schedule Interview
-                </button>
-              </form>
-            </>
-          )}
+      <button type="submit" className="submit-btn">
+        Schedule Interview
+      </button>
+    </form>
+
+    {/* INTERVIEW LIST */}
+    {scheduledInterviews.length > 0 && (
+      <div style={{ marginTop: "30px" }}>
+        <h3>Scheduled Interviews</h3>
+        {scheduledInterviews.map((interview) => (
+          <div key={interview.id} className="student-card">
+            <p><strong>Student ID:</strong> {interview.studentId}</p>
+            <p><strong>Date:</strong> {interview.interviewDate}</p>
+            <p><strong>Mode:</strong> {interview.mode}</p>
+            {interview.mode === "Online" && (
+              <p><strong>Link:</strong> {interview.link}</p>
+            )}
+            {interview.mode === "Offline" && (
+              <p><strong>Location:</strong> {interview.location}</p>
+            )}
+          </div>
+        ))}
+      </div>
+    )}
+  </>
+)}
+
 
         </section>
       </main>
