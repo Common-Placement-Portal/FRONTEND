@@ -66,6 +66,8 @@ const CompanyDashboard = () => {
     location: "",
   });
 
+  const [scheduledInterviews, setScheduledInterviews] = useState([]); 
+
   const handleInterviewChange = (e) => {
     setInterviewForm({
       ...interviewForm,
@@ -79,6 +81,7 @@ const CompanyDashboard = () => {
   const newInterview = {
     id: Date.now(),
     ...interviewForm,
+    status: "Scheduled",
   };
 
   setScheduledInterviews([...scheduledInterviews, newInterview]);
@@ -104,7 +107,18 @@ const handleDeleteInterview = (id) => {
 };
 
 
-const [scheduledInterviews, setScheduledInterviews] = useState([]);
+const handleStatusChange = (id, newStatus) => {
+  const updatedList = scheduledInterviews.map((interview) =>
+    interview.id === id
+      ? { ...interview, status: newStatus }
+      : interview
+  );
+
+  setScheduledInterviews(updatedList);
+};
+
+
+//const [scheduledInterviews, setScheduledInterviews] = useState([]);
 
   return (
     <div className="company-dashboard">
@@ -254,6 +268,22 @@ const [scheduledInterviews, setScheduledInterviews] = useState([]);
             <p><strong>Student ID:</strong> {interview.studentId}</p>
             <p><strong>Date:</strong> {interview.interviewDate}</p>
             <p><strong>Mode:</strong> {interview.mode}</p>
+
+          <p>
+  <strong>Status:</strong>{" "}
+  <select
+    value={interview.status}
+    onChange={(e) =>
+      handleStatusChange(interview.id, e.target.value)
+    }
+  >
+    <option value="Scheduled">Scheduled</option>
+    <option value="Completed">Completed</option>
+    <option value="Cancelled">Cancelled</option>
+  </select>
+</p>
+
+
             {interview.mode === "Online" && (
               <p><strong>Link:</strong> {interview.link}</p>
             )}
