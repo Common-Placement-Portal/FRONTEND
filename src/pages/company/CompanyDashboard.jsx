@@ -94,6 +94,16 @@ const CompanyDashboard = () => {
   alert("Interview Scheduled Successfully");
 };
 
+
+const handleDeleteInterview = (id) => {
+  const updatedList = scheduledInterviews.filter(
+    (interview) => interview.id !== id
+  );
+
+  setScheduledInterviews(updatedList);
+};
+
+
 const [scheduledInterviews, setScheduledInterviews] = useState([]);
 
   return (
@@ -250,6 +260,14 @@ const [scheduledInterviews, setScheduledInterviews] = useState([]);
             {interview.mode === "Offline" && (
               <p><strong>Location:</strong> {interview.location}</p>
             )}
+
+             <button
+    className="schedule-btn"
+    style={{ background: "#dc3545", marginTop: "10px" }}
+    onClick={() => handleDeleteInterview(interview.id)}
+  >
+    Delete
+  </button>
           </div>
         ))}
       </div>
