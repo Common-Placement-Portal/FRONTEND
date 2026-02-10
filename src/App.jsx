@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+import Home from "./pages/Home";
 import Login from "./pages/Login";
 import StudentDashboard from "./dashboards/student/StudentDashboard";
 import CompanyDashboardEntry from "./dashboards/company/CompanyDashboardEntry";
@@ -10,7 +11,8 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/student" element={<StudentDashboard />} />
           <Route path="/coordinator" element={<CoordinatorDashboard />} />
           <Route path="/company/dashboard-new" element={<CompanyDashboardEntry />} />
