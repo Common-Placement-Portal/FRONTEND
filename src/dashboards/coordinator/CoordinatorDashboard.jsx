@@ -50,8 +50,55 @@ const CoordinatorDashboard = () => {
             <form className="dashboard-form">
               <div className="form-row">
                 <div className="form-group">
-                  <label>Full Name</label>
-                  <input type="text" className="form-input" placeholder="Enter student name" />
+                  <label>First Name</label>
+                  <input type="text" className="form-input" placeholder="Enter first name" />
+                </div>
+                <div className="form-group">
+                  <label>Last Name</label>
+                  <input type="text" className="form-input" placeholder="Enter last name" />
+                </div>
+              </div>
+              
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Email</label>
+                  <input type="email" className="form-input" placeholder="Enter email" />
+                </div>
+                <div className="form-group">
+                  <label>Phone</label>
+                  <input type="tel" className="form-input" placeholder="Enter phone number" />
+                </div>
+              </div>
+              
+              <div className="form-row">
+                <div className="form-group">
+                  <label>PRN</label>
+                  <input type="text" className="form-input" placeholder="Enter PRN" />
+                </div>
+                <div className="form-group">
+                  <label>Course</label>
+                  <select className="form-input">
+                    <option>Select Course</option>
+                    <option>PG-DAC</option>
+                    <option>PG-DBDA</option>
+                    <option>PG-DITISS</option>
+                  </select>
+                </div>
+              </div>
+              
+              <button type="submit" className="submit-btn">Add Student</button>
+            </form>
+          </div>
+        )}
+
+        {activeSection === 'addCompany' && (
+          <div className="form-container">
+            <h2>Add Company</h2>
+            <form className="dashboard-form">
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Company Name</label>
+                  <input type="text" className="form-input" placeholder="Enter company name" />
                 </div>
                 <div className="form-group">
                   <label>Email</label>
@@ -65,28 +112,23 @@ const CoordinatorDashboard = () => {
                   <input type="tel" className="form-input" placeholder="Enter phone number" />
                 </div>
                 <div className="form-group">
-                  <label>PRN</label>
-                  <input type="text" className="form-input" placeholder="Enter PRN" />
+                  <label>Website</label>
+                  <input type="url" className="form-input" placeholder="Enter website URL" />
                 </div>
               </div>
               
               <div className="form-row">
                 <div className="form-group">
-                  <label>Course</label>
-                  <select className="form-input">
-                    <option>Select Course</option>
-                    <option>PG-DAC</option>
-                    <option>PG-DBDA</option>
-                    <option>PG-DITISS</option>
-                  </select>
+                  <label>Industry</label>
+                  <input type="text" className="form-input" placeholder="Enter industry" />
                 </div>
                 <div className="form-group">
-                  <label>Batch</label>
-                  <input type="text" className="form-input" placeholder="Enter batch" />
+                  <label>Location</label>
+                  <input type="text" className="form-input" placeholder="Enter location" />
                 </div>
               </div>
               
-              <button type="submit" className="submit-btn">Add Student</button>
+              <button type="submit" className="submit-btn">Add Company</button>
             </form>
           </div>
         )}
