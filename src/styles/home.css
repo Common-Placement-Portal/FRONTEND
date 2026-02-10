@@ -89,7 +89,7 @@ body {
 }
 
 .login-btn {
-  background: #2c3e50 !important;
+  background: #007bff !important;
   color: white !important;
   padding: 12px 35px !important;
   border-radius: 30px !important;
@@ -98,22 +98,22 @@ body {
 }
 
 .login-btn:hover {
-  background: #34495e !important;
+  background: #0056b3 !important;
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(44, 62, 80, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
 }
 
 /* Hero Section */
 .hero-section {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #dc2430 100%);
-  padding: 80px 0 60px;
+  padding: 60px 0 40px;
   color: white;
 }
 
 .hero-section .container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 50px;
+  gap: 30px;
   align-items: center;
 }
 
@@ -128,16 +128,16 @@ body {
 }
 
 .hero-content h1 {
-  font-size: 48px;
+  font-size: 40px;
   font-weight: bold;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   line-height: 1.2;
 }
 
 .hero-content h2 {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 400;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .celebration-text {
