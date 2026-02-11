@@ -1,11 +1,10 @@
-/* Dashboard Container */
+/* Shared Dashboard Styles */
 .dashboard-container {
   display: flex;
   height: 100vh;
   background: linear-gradient(135deg, #4a148c 0%, #7b1fa2 25%, #ad1457 75%, #d32f2f 100%);
 }
 
-/* Sidebar Styles */
 .sidebar {
   width: 280px;
   background: white;
@@ -15,7 +14,6 @@
   box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Profile Section */
 .profile-section {
   padding: 30px 20px;
   text-align: center;
@@ -63,7 +61,6 @@
   font-weight: 600;
 }
 
-/* Navigation Menu */
 .nav-menu {
   flex: 1;
   padding: 20px 0;
@@ -77,6 +74,11 @@
   transition: all 0.3s ease;
   border-left: 3px solid transparent;
   color: #2c3e50;
+  background: transparent;
+  border: none;
+  border-left: 3px solid transparent;
+  text-align: left;
+  width: 100%;
 }
 
 .nav-item:hover {
@@ -101,14 +103,12 @@
   font-weight: 500;
 }
 
-/* Main Content */
 .main-content {
   flex: 1;
   padding: 40px;
   overflow-y: auto;
 }
 
-/* Form Container */
 .form-container {
   background: white;
   padding: 50px;
@@ -193,6 +193,119 @@
   background: linear-gradient(135deg, #7b1fa2 0%, #ad1457 100%);
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(74, 20, 140, 0.3);
+}
+
+/* Student-specific sections */
+.interviews-section,
+.selections-section {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(74, 20, 140, 0.15);
+  border-top: 4px solid #4a148c;
+}
+
+.interviews-section h2,
+.selections-section h2 {
+  color: #2c3e50;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.interviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.interview-card {
+  background: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.interview-card:hover {
+  border-color: #4a148c;
+  box-shadow: 0 4px 12px rgba(74, 20, 140, 0.15);
+  transform: translateY(-2px);
+}
+
+.interview-card h3 {
+  color: #4a148c;
+  margin: 0 0 15px;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.interview-card p {
+  margin: 8px 0;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.interview-card strong {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.selections-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.selection-card {
+  background: #f8f9fa;
+  border: 3px solid #28a745;
+  border-radius: 12px;
+  padding: 25px;
+  max-width: 300px;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.selection-card:hover {
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+  transform: translateY(-2px);
+}
+
+.selection-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.selection-card h3 {
+  color: #2c3e50;
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.status-badge {
+  background: #28a745;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.selection-card p {
+  margin: 8px 0;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.selection-card strong {
+  color: #2c3e50;
+  font-weight: 600;
 }
 
 /* Responsive Design */

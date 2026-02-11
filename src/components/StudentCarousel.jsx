@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import img1 from '../assets/images/cdac1.jpg.png';
+import img2 from '../assets/images/cdac2.jpg.png';
+import img3 from '../assets/images/cdac3.jpg.png';
+import img4 from '../assets/images/cdac4.jpg.png';
 
 const StudentCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   
-  const images = [
-    'https://via.placeholder.com/600x400/667eea/ffffff?text=CDAC+Campus+1',
-    'https://via.placeholder.com/600x400/764ba2/ffffff?text=CDAC+Campus+2',
-    'https://via.placeholder.com/600x400/f093fb/ffffff?text=Placement+Drive',
-    'https://via.placeholder.com/600x400/4facfe/ffffff?text=Students+Success'
-  ];
+  const images = [img1, img2, img3, img4];
 
   useEffect(() => {
     const timer = setInterval(() => {
