@@ -1,14 +1,7 @@
-import React, { useState } from 'react'
-import CompanyDashboardNew from './CompanyDashboardNew'
+import CompanyDashboard from "../../pages/company/CompanyDashboard";
 
-const CompanyDashboardEntry = () => {
-  const [ready, setReady] = useState(true)
-
-  if (!ready) {
-    return <div>Initializing Company Dashboard...</div>
-  }
-
-  return <CompanyDashboardNew />
+function CompanyDashboardEntry() {
+  return <CompanyDashboard />;
 }
 
-export default CompanyDashboardEntry
+export default CompanyDashboardEntry;
