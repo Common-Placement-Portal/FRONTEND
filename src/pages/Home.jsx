@@ -50,6 +50,71 @@ const Home = () => {
 
       {/* Marquee */}
       <Marquee />
+
+    {/* ================= ABOUT SECTION ================= */}
+<section className="info-section" id="about">
+  <div className="container">
+    <h2>About CDAC Placement Portal</h2>
+
+    <div className="info-cards">
+      <div className="info-card">
+        <h3>🎯 Our Objective</h3>
+        <p>
+          To connect talented students with leading companies and ensure
+          successful placements in the IT industry.
+        </p>
+      </div>
+
+      <div className="info-card">
+        <h3>👨‍🎓 For Students</h3>
+        <p>
+          Students can update profiles, check job postings, and track
+          interview status through the portal.
+        </p>
+      </div>
+
+      <div className="info-card">
+        <h3>🏢 For Companies</h3>
+        <p>
+          Companies can post jobs, shortlist candidates, and schedule
+          interviews easily.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{/* ================= PLACEMENT SECTION ================= */}
+<section className="placement-section" id="placement">
+  <div className="container">
+    <h2>Placement Statistics</h2>
+
+    <div className="stats-overview">
+      <div className="stat-item">
+        <h3>95%</h3>
+        <p>Overall Placement Rate</p>
+      </div>
+
+      <div className="stat-item">
+        <h3>500+</h3>
+        <p>Students Placed</p>
+      </div>
+
+      <div className="stat-item">
+        <h3>150+</h3>
+        <p>Partner Companies</p>
+      </div>
+
+      <div className="stat-item">
+        <h3>12 LPA</h3>
+        <p>Highest Package</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
     </div>
   )
 }
