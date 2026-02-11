@@ -133,28 +133,31 @@ const StudentDashboard = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    if (window.confirm('Are you sure you want to logout?')) {
-      navigate('/');
-    }
+    navigate('/login');
   };
 
   return (
-    <div className="student-dashboard">
+    <div className="dashboard-container">
       <div className="sidebar">
-        <div className="profile-card">
+        <div className="profile-section">
           <div className="profile-avatar">
-            {student.photo ? (
-              <img src={student.photo} alt="Profile" />
-            ) : (
-              <div className="avatar-placeholder">PM</div>
-            )}
+            <div className="avatar-circle">
+              {student.photo ? (
+                <img src={student.photo} alt="Profile" style={{width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%'}} />
+              ) : (
+                `${student.firstName.charAt(0)}${student.lastName.charAt(0)}`
+              )}
+            </div>
           </div>
-          <h3>{student.firstName} {student.lastName}</h3>
-          <p>{student.course}</p>
+          <div className="profile-info">
+            <h3>{student.firstName} {student.lastName}</h3>
+            <p>{student.email}</p>
+            <span className="role-badge">Student</span>
+          </div>
         </div>
         
-        <nav className="sidebar-nav">
-          <button 
+        <div className="nav-menu">
+          <div 
             className={`nav-item ${!showAcademics && !showInterviews && !showSelections ? 'active' : ''}`}
             onClick={() => {
               setShowAcademics(false);
@@ -162,49 +165,41 @@ const StudentDashboard = () => {
               setShowSelections(false);
             }}
           >
-            <span className="nav-icon">👤</span> My Profile
-          </button>
-          <button 
+            <div className="nav-icon">👤</div>
+            <span>My Profile</span>
+          </div>
+          <div 
             className={`nav-item ${showAcademics ? 'active' : ''}`}
             onClick={handleProfileUpdate}
           >
-            <span className="nav-icon">✏️</span> Update Profile
-          </button>
-          <button 
+            <div className="nav-icon">✏️</div>
+            <span>Update Profile</span>
+          </div>
+          <div 
             className={`nav-item ${showInterviews ? 'active' : ''}`}
             onClick={handleShowInterviews}
           >
-            <span className="nav-icon">📅</span> Interviews
-          </button>
-          <button 
+            <div className="nav-icon">📅</div>
+            <span>Interviews</span>
+          </div>
+          <div 
             className={`nav-item ${showSelections ? 'active' : ''}`}
             onClick={handleShowSelections}
           >
-            <span className="nav-icon">📋</span> Selections
-          </button>
-        </nav>
+            <div className="nav-icon">📋</div>
+            <span>Selections</span>
+          </div>
+          <div 
+            className="nav-item"
+            onClick={handleLogout}
+          >
+            <div className="nav-icon">🚪</div>
+            <span>Logout</span>
+          </div>
+        </div>
       </div>
 
       <div className="main-content">
-        <div className="top-navbar">
-          <div className="navbar-brand">
-            <span className="cdac-logo">CDAC</span>
-            <div>
-              <h4>CDAC Placement Portal</h4>
-              <p>Authorized Training Centre</p>
-            </div>
-          </div>
-          <div className="navbar-links">
-            <a href="/">Home</a>
-            <a href="/">About Us</a>
-            <a href="/">Placement</a>
-            <a href="/">Contact Us</a>
-            <a href="/">Dashboard</a>
-            <button onClick={handleLogout} className="logout-btn">Logout</button>
-          </div>
-        </div>
-
-        <div className="content-area">
         {showSelections ? (
           <div className="selections-section">
             <h2>My Selections</h2>
@@ -238,254 +233,156 @@ const StudentDashboard = () => {
             </div>
           </div>
         ) : !showAcademics ? (
-          <div className="profile-section">
+          <div className="form-container">
             <h2>Profile Information</h2>
-            <form>
-              <div className="photo-upload">
-                <div className="photo-preview">
-                  {student.photo ? (
-                    <img src={student.photo} alt="Profile" />
-                  ) : (
-                    <div className="photo-placeholder">{student.firstName.charAt(0)}{student.lastName.charAt(0)}</div>
-                  )}
+            <form className="dashboard-form">
+              <div className="form-row">
+                <div className="form-group">
+                  <label>PRN</label>
+                  <input 
+                    className="form-input"
+                    type="text" 
+                    value={student.prn} 
+                    onChange={(e) => setStudent({...student, prn: e.target.value})}
+                  />
                 </div>
-                <button type="button" className="change-photo-btn" onClick={() => document.getElementById('photoInput').click()}>Change Photo</button>
-                <input id="photoInput" type="file" accept="image/*" onChange={handlePhotoUpload} style={{display: 'none'}} />
+                <div className="form-group">
+                  <label>Name</label>
+                  <input 
+                    className="form-input"
+                    type="text" 
+                    value={student.firstName + ' ' + student.lastName} 
+                    onChange={(e) => setStudent({...student, firstName: e.target.value.split(' ')[0], lastName: e.target.value.split(' ')[1] || ''})}
+                  />
+                </div>
               </div>
-              
-              <div className="form-group">
-                <label>PRN</label>
-                <input 
-                  type="text" 
-                  value={student.prn} 
-                  onChange={(e) => setStudent({...student, prn: e.target.value})}
-                />
-              </div>
-              
-              <div className="form-group">
-                <label>Name</label>
-                <input 
-                  type="text" 
-                  value={student.firstName + ' ' + student.lastName} 
-                  onChange={(e) => setStudent({...student, firstName: e.target.value.split(' ')[0], lastName: e.target.value.split(' ')[1] || ''})}
-                />
-              </div>
-              
-              <div className="form-group">
-                <label>Email</label>
-                <input 
-                  type="email" 
-                  value={student.email} 
-                  onChange={(e) => setStudent({...student, email: e.target.value})}
-                />
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Email</label>
+                  <input 
+                    className="form-input"
+                    type="email" 
+                    value={student.email} 
+                    onChange={(e) => setStudent({...student, email: e.target.value})}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Phone</label>
+                  <input 
+                    className="form-input"
+                    type="text" 
+                    value={student.phone} 
+                    onChange={(e) => setStudent({...student, phone: e.target.value})}
+                  />
+                </div>
               </div>
             </form>
           </div>
         ) : (
-          <div className="academics-section">
-            <div className="photo-upload">
-              <div className="photo-preview">
-                {student.photo ? (
-                  <img src={student.photo} alt="Profile" />
-                ) : (
-                  <div className="photo-placeholder">{student.firstName.charAt(0)}{student.lastName.charAt(0)}</div>
-                )}
-              </div>
-              <button type="button" className="change-photo-btn" onClick={() => document.getElementById('photoInput2').click()}>Change Photo</button>
-              <input id="photoInput2" type="file" accept="image/*" onChange={handlePhotoUpload} style={{display: 'none'}} />
-            </div>
-            
-            <h2>Personal Information</h2>
-            <div className="form-grid">
-              <div className="form-group">
-                <label>First Name</label>
-                <input value={student.firstName} onChange={(e) => setStudent({...student, firstName: e.target.value})} />
-              </div>
-              <div className="form-group">
-                <label>Last Name</label>
-                <input value={student.lastName} onChange={(e) => setStudent({...student, lastName: e.target.value})} />
-              </div>
-              <div className="form-group">
-                <label>Email</label>
-                <input value={student.email} onChange={(e) => setStudent({...student, email: e.target.value})} />
-              </div>
-              <div className="form-group">
-                <label>Phone</label>
-                <input value={student.phone} onChange={(e) => setStudent({...student, phone: e.target.value})} />
-              </div>
-              <div className="form-group">
-                <label>PRN</label>
-                <input value={student.prn} onChange={(e) => setStudent({...student, prn: e.target.value})} />
-              </div>
-              <div className="form-group">
-                <label>Date of Birth</label>
-                <input type="date" value={student.dob} onChange={(e) => setStudent({...student, dob: e.target.value})} />
-              </div>
-              <div className="form-group">
-                <label>Gender</label>
-                <select value={student.gender} onChange={(e) => setStudent({...student, gender: e.target.value})}>
-                  <option>Male</option>
-                  <option>Female</option>
-                  <option>Other</option>
-                </select>
-              </div>
-            </div>
-            
-            <div className="form-group">
-              <label>Address</label>
-              <textarea value={student.address} onChange={(e) => setStudent({...student, address: e.target.value})} />
-            </div>
-            
-            <div className="form-grid">
-              <div className="form-group">
-                <label>City</label>
-                <input value={student.city} onChange={(e) => setStudent({...student, city: e.target.value})} />
-              </div>
-              <div className="form-group">
-                <label>State</label>
-                <input value={student.state} onChange={(e) => setStudent({...student, state: e.target.value})} />
-              </div>
-              <div className="form-group">
-                <label>Pincode</label>
-                <input value={student.pincode} onChange={(e) => setStudent({...student, pincode: e.target.value})} />
-              </div>
-            </div>
-
-            <h2>Academic Information</h2>
-            
-            <h3>10th Class</h3>
-            <div className="form-grid">
-              <div className="form-group">
-                <label>Board</label>
-                <input value={student.academics.tenth.board} onChange={(e) => handleAcademicChange('tenth', 'board', e.target.value)} />
-              </div>
-              <div className="form-group">
-                <label>School</label>
-                <input value={student.academics.tenth.school} onChange={(e) => handleAcademicChange('tenth', 'school', e.target.value)} />
-              </div>
-              <div className="form-group">
-                <label>Year of Completion</label>
-                <input value={student.academics.tenth.year} onChange={(e) => handleAcademicChange('tenth', 'year', e.target.value)} />
-              </div>
-              <div className="form-group">
-                <label>CGPA</label>
-                <input value={student.academics.tenth.cgpa} onChange={(e) => handleAcademicChange('tenth', 'cgpa', e.target.value)} />
-              </div>
-            </div>
-
-            <h3>12th Class</h3>
-            <div className="form-grid">
-              <div className="form-group">
-                <label>Board</label>
-                <input value={student.academics.twelfth.board} onChange={(e) => handleAcademicChange('twelfth', 'board', e.target.value)} />
-              </div>
-              <div className="form-group">
-                <label>School</label>
-                <input value={student.academics.twelfth.school} onChange={(e) => handleAcademicChange('twelfth', 'school', e.target.value)} />
-              </div>
-              <div className="form-group">
-                <label>Year of Completion</label>
-                <input value={student.academics.twelfth.year} onChange={(e) => handleAcademicChange('twelfth', 'year', e.target.value)} />
-              </div>
-              <div className="form-group">
-                <label>CGPA</label>
-                <input value={student.academics.twelfth.cgpa} onChange={(e) => handleAcademicChange('twelfth', 'cgpa', e.target.value)} />
-              </div>
-            </div>
-
-            <h3>Diploma</h3>
-            <div className="form-grid">
-              <div className="form-group">
-                <label>University</label>
-                <input value={student.academics.diploma.university} onChange={(e) => handleAcademicChange('diploma', 'university', e.target.value)} />
-              </div>
-              <div className="form-group">
-                <label>College</label>
-                <input value={student.academics.diploma.college} onChange={(e) => handleAcademicChange('diploma', 'college', e.target.value)} />
-              </div>
-              <div className="form-group">
-                <label>Branch</label>
-                <input value={student.academics.diploma.branch} onChange={(e) => handleAcademicChange('diploma', 'branch', e.target.value)} />
-              </div>
-              <div className="form-group">
-                <label>Year of Completion</label>
-                <input value={student.academics.diploma.year} onChange={(e) => handleAcademicChange('diploma', 'year', e.target.value)} />
-              </div>
-              <div className="form-group">
-                <label>CGPA</label>
-                <input value={student.academics.diploma.cgpa} onChange={(e) => handleAcademicChange('diploma', 'cgpa', e.target.value)} />
-              </div>
-            </div>
-
-            <h3>Degree</h3>
-            <div className="form-grid">
-              <div className="form-group">
-                <label>University</label>
-                <input value={student.academics.degree.university} onChange={(e) => handleAcademicChange('degree', 'university', e.target.value)} />
-              </div>
-              <div className="form-group">
-                <label>College</label>
-                <input value={student.academics.degree.college} onChange={(e) => handleAcademicChange('degree', 'college', e.target.value)} />
-              </div>
-              <div className="form-group">
-                <label>Branch</label>
-                <input value={student.academics.degree.branch} onChange={(e) => handleAcademicChange('degree', 'branch', e.target.value)} />
-              </div>
-              <div className="form-group">
-                <label>Year of Completion</label>
-                <input value={student.academics.degree.year} onChange={(e) => handleAcademicChange('degree', 'year', e.target.value)} />
-              </div>
-              <div className="form-group">
-                <label>CGPA</label>
-                <input value={student.academics.degree.cgpa} onChange={(e) => handleAcademicChange('degree', 'cgpa', e.target.value)} />
-              </div>
-            </div>
-
-            <h3>Post Graduation</h3>
-            <div className="form-grid">
-              <div className="form-group">
-                <label>University</label>
-                <input value={student.academics.postGraduation.university} onChange={(e) => handleAcademicChange('postGraduation', 'university', e.target.value)} />
-              </div>
-              <div className="form-group">
-                <label>College</label>
-                <input value={student.academics.postGraduation.college} onChange={(e) => handleAcademicChange('postGraduation', 'college', e.target.value)} />
-              </div>
-              <div className="form-group">
-                <label>Course</label>
-                <input value={student.academics.postGraduation.course} onChange={(e) => handleAcademicChange('postGraduation', 'course', e.target.value)} />
-              </div>
-              <div className="form-group">
-                <label>Year of Completion</label>
-                <input value={student.academics.postGraduation.year} onChange={(e) => handleAcademicChange('postGraduation', 'year', e.target.value)} />
-              </div>
-            </div>
-
-            <h2>Project</h2>
-            {student.projects.map((project, index) => (
-              <div key={index} className="project-section">
-                <h3>Project {index + 1}</h3>
-                <div className="form-grid">
-                  <div className="form-group">
-                    <label>Title</label>
-                    <input value={project.title} onChange={(e) => handleProjectChange(index, 'title', e.target.value)} />
-                  </div>
-                  <div className="form-group">
-                    <label>Technology Used</label>
-                    <input value={project.technology} onChange={(e) => handleProjectChange(index, 'technology', e.target.value)} />
-                  </div>
+          <div className="form-container">
+            <h2>Update Profile</h2>
+            <form className="dashboard-form">
+              <div className="form-row">
+                <div className="form-group">
+                  <label>First Name</label>
+                  <input className="form-input" value={student.firstName} onChange={(e) => setStudent({...student, firstName: e.target.value})} />
                 </div>
                 <div className="form-group">
-                  <label>Description</label>
-                  <textarea value={project.description} onChange={(e) => handleProjectChange(index, 'description', e.target.value)} />
+                  <label>Last Name</label>
+                  <input className="form-input" value={student.lastName} onChange={(e) => setStudent({...student, lastName: e.target.value})} />
                 </div>
               </div>
-            ))}
-            
-            <button className="save-academics-btn" onClick={() => alert('Profile updated successfully!')}>Save Profile</button>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Email</label>
+                  <input className="form-input" value={student.email} onChange={(e) => setStudent({...student, email: e.target.value})} />
+                </div>
+                <div className="form-group">
+                  <label>Phone</label>
+                  <input className="form-input" value={student.phone} onChange={(e) => setStudent({...student, phone: e.target.value})} />
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>PRN</label>
+                  <input className="form-input" value={student.prn} onChange={(e) => setStudent({...student, prn: e.target.value})} />
+                </div>
+                <div className="form-group">
+                  <label>Date of Birth</label>
+                  <input className="form-input" type="date" value={student.dob} onChange={(e) => setStudent({...student, dob: e.target.value})} />
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Gender</label>
+                  <select className="form-input" value={student.gender} onChange={(e) => setStudent({...student, gender: e.target.value})}>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label>Course</label>
+                  <input className="form-input" value={student.course} onChange={(e) => setStudent({...student, course: e.target.value})} />
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>City</label>
+                  <input className="form-input" value={student.city} onChange={(e) => setStudent({...student, city: e.target.value})} />
+                </div>
+                <div className="form-group">
+                  <label>State</label>
+                  <input className="form-input" value={student.state} onChange={(e) => setStudent({...student, state: e.target.value})} />
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Pincode</label>
+                  <input className="form-input" value={student.pincode} onChange={(e) => setStudent({...student, pincode: e.target.value})} />
+                </div>
+                <div className="form-group">
+                  <label>Address</label>
+                  <input className="form-input" value={student.address} onChange={(e) => setStudent({...student, address: e.target.value})} />
+                </div>
+              </div>
+
+              <h2 style={{marginTop: '30px'}}>Academic Information</h2>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>10th Board</label>
+                  <input className="form-input" value={student.academics.tenth.board} onChange={(e) => handleAcademicChange('tenth', 'board', e.target.value)} />
+                </div>
+                <div className="form-group">
+                  <label>10th CGPA</label>
+                  <input className="form-input" value={student.academics.tenth.cgpa} onChange={(e) => handleAcademicChange('tenth', 'cgpa', e.target.value)} />
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>12th Board</label>
+                  <input className="form-input" value={student.academics.twelfth.board} onChange={(e) => handleAcademicChange('twelfth', 'board', e.target.value)} />
+                </div>
+                <div className="form-group">
+                  <label>12th CGPA</label>
+                  <input className="form-input" value={student.academics.twelfth.cgpa} onChange={(e) => handleAcademicChange('twelfth', 'cgpa', e.target.value)} />
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Degree University</label>
+                  <input className="form-input" value={student.academics.degree.university} onChange={(e) => handleAcademicChange('degree', 'university', e.target.value)} />
+                </div>
+                <div className="form-group">
+                  <label>Degree CGPA</label>
+                  <input className="form-input" value={student.academics.degree.cgpa} onChange={(e) => handleAcademicChange('degree', 'cgpa', e.target.value)} />
+                </div>
+              </div>
+              
+              <button type="button" className="submit-btn" onClick={() => alert('Profile updated successfully!')}>Save Profile</button>
+            </form>
           </div>
         )}
-        </div>
       </div>
     </div>
   );

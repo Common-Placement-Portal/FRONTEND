@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/dashboard.css';
 
 const CoordinatorDashboard = () => {
   const [activeSection, setActiveSection] = useState('addStudent');
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate('/login');
+  };
 
   return (
     <div className="dashboard-container">
@@ -38,6 +44,14 @@ const CoordinatorDashboard = () => {
           >
             <div className="nav-icon">🏢</div>
             <span>Add Company</span>
+          </div>
+          
+          <div 
+            className="nav-item"
+            onClick={handleLogout}
+          >
+            <div className="nav-icon">🚪</div>
+            <span>Logout</span>
           </div>
         </div>
       </div>
